@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        id="@+id/tab_home"
+        icon="@drawable/ic_home_black_24dp"
+        title="Home" />
+    <tab
+        id="@+id/tab_events"
+        icon="@drawable/ic_event"
+        title="Events" />
+    <tab
+        id="@+id/tab_profile"
+        icon="@drawable/ic_sentiment_satisfied_black_24dp"
+        title="Me" />
+</tabs>
