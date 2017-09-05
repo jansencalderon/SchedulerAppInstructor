@@ -1,5 +1,7 @@
 package ph.edu.tip.schedulerappinstructor.util;
 
+import android.text.TextUtils;
+
 /**
  * Created by itsodeveloper on 04/08/2017.
  */
@@ -16,6 +18,11 @@ public class TagsManipulator {
 
         }
         return outputTag;
+    }
+
+    public static String JoinTags(String[] tags)
+    {
+        return TextUtils.join(",", tags).trim();
     }
 
     public static String ReservationStatus(String res)

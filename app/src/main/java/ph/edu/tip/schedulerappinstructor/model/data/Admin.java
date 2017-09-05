@@ -33,11 +33,24 @@ public class Admin extends RealmObject {
     private String image;
     @SerializedName("company_id")
     private String companyId;
-
     @SerializedName("position")
     private String position;
     @SerializedName("description")
     private String description;
+
+    //admin instructor
+
+    @SerializedName("added_by")
+    private int addedBy;
+    @SerializedName("enabled")
+    private String enabled;
+    @SerializedName("api_token")
+    private String apiToken;
+    @SerializedName("created_at")
+    private String createdAt;
+    @SerializedName("updated_at")
+    private String updatedAt;
+
 
 
 
@@ -136,5 +149,51 @@ public class Admin extends RealmObject {
     }
 
 
+    public int getAdmin_id() {
+        return admin_id;
+    }
 
+    public void setAdmin_id(int admin_id) {
+        this.admin_id = admin_id;
+    }
+
+    public int getAddedBy() {
+        return addedBy;
+    }
+
+    public void setAddedBy(int addedBy) {
+        this.addedBy = addedBy;
+    }
+
+    public String getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(String enabled) {
+        this.enabled = enabled;
+    }
+
+    public String getApiToken() {
+        return apiToken;
+    }
+
+    public void setApiToken(String apiToken) {
+        this.apiToken = apiToken;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 }

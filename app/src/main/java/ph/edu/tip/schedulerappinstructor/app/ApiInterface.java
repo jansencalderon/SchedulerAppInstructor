@@ -1,11 +1,11 @@
 package ph.edu.tip.schedulerappinstructor.app;
 
 
-
 import java.util.List;
 import java.util.Map;
 
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
@@ -33,6 +33,7 @@ import ph.edu.tip.schedulerappinstructor.model.response.BasicResponse;
 import ph.edu.tip.schedulerappinstructor.model.response.LoginResponse;
 import ph.edu.tip.schedulerappinstructor.model.response.UploadProfileImageResponse;
 
+//TODO: Delete Unused APIs
 public interface ApiInterface {
 
 
@@ -60,9 +61,6 @@ public interface ApiInterface {
     Call<BasicResponse> deleteGCMToken(@Header(Constants.AUTHORIZATION) String authorization, @Header(Constants.ACCEPT) String json);
 
 
-
-
-
     //Profile
     @GET(Endpoints.PROVINCE)
     Call<List<Province>> getProvince();
@@ -88,8 +86,6 @@ public interface ApiInterface {
             , @Part MultipartBody.Part file);
 
 
-
-
     //Promo
     @GET(Endpoints.PROMO_LIST)
     Call<List<Promo>> getPromoList(@Header(Constants.AUTHORIZATION) String authorization, @Header(Constants.ACCEPT) String json);
@@ -98,7 +94,6 @@ public interface ApiInterface {
     @GET(Endpoints.PROMO_DETAIL)
     Call<Promo> getPromoDetail(@Header(Constants.AUTHORIZATION) String authorization,
                                @Path("id") int promoId, @Header(Constants.ACCEPT) String json);
-
 
 
     //Company
@@ -112,8 +107,8 @@ public interface ApiInterface {
 
     //Events
     @GET(Endpoints.EVENT_DETAIL)
-    Call<Event>getEventDetail(@Header(Constants.AUTHORIZATION) String authorization,
-                              @Path("id") String eventId, @Header(Constants.ACCEPT) String json);
+    Call<Event> getEventDetail(@Header(Constants.AUTHORIZATION) String authorization,
+                               @Path("id") String eventId, @Header(Constants.ACCEPT) String json);
 
     @GET(Endpoints.EVENT_LIST)
     Call<List<Event>> getEventList(@Header(Constants.AUTHORIZATION) String authorization, @Header(Constants.ACCEPT) String json);
@@ -121,12 +116,11 @@ public interface ApiInterface {
 
     //Daily
     @GET(Endpoints.DAILY_DETAIL)
-    Call<EventDaily>getDailyDetail(@Header(Constants.AUTHORIZATION) String authorization,
-                                   @Path("id") String eventId, @Header(Constants.ACCEPT) String json);
+    Call<EventDaily> getDailyDetail(@Header(Constants.AUTHORIZATION) String authorization,
+                                    @Path("id") String eventId, @Header(Constants.ACCEPT) String json);
 
     @GET(Endpoints.DAILY_LIST)
     Call<List<EventDaily>> getDailyList(@Header(Constants.AUTHORIZATION) String authorization, @Header(Constants.ACCEPT) String json);
-
 
 
     //Admin
@@ -157,4 +151,35 @@ public interface ApiInterface {
                                      @Field(Constants.CATEGORY_ID) String eventid,
                                      @Field(Constants.SEAT_NUM) String seatnum,
                                      @Header(Constants.ACCEPT) String json);
+
+    //////////////////// end of uly api //////////////////////////
+
+
+    //scheduled events
+
+    @Multipart
+    @POST(Endpoints.CREATE_SCHEDULED_EVENT)
+    Call<BasicResponse> createEvent(@Header(Constants.AUTHORIZATION) String authorization,
+                                    @Part(Constants.ApiParameters.ScheduledEvents.SCHEDULED_EVENT_NAME) RequestBody name,
+                                    @Part(Constants.ApiParameters.ScheduledEvents.SCHEDULED_EVENT_DESC) RequestBody desc,
+                                    @Part(Constants.ApiParameters.ScheduledEvents.SCHEDULED_EVENT_LOC) RequestBody location,
+                                    @Part(Constants.ApiParameters.ScheduledEvents.SCHEDULED_EVENT_ADD) RequestBody address,
+                                    @Part(Constants.ApiParameters.ScheduledEvents.SCHEDULED_EVENT_LAT) RequestBody lat,
+                                    @Part(Constants.ApiParameters.ScheduledEvents.SCHEDULED_EVENT_LNG) RequestBody lng,
+                                    @Part(Constants.ApiParameters.ScheduledEvents.SCHEDULED_EVENT_TYPE) RequestBody type,
+                                    @Part(Constants.ApiParameters.ScheduledEvents.SCHEDULED_EVENT_TAGS) RequestBody tags,
+                                    @Part MultipartBody.Part image,
+                                    @Header(Constants.ACCEPT) String json);
+
+    @Multipart
+    @POST(Endpoints.CREATE_SCHEDULED_EVENT_SLOT_CATEGORY)
+    Call<BasicResponse> createEventSlotCategory(@Header(Constants.AUTHORIZATION) String authorization,
+                                                @Part(Constants.ApiParameters.ScheduledEventSlotCategory.SCHEDULED_EVENT_ID) RequestBody scheduledEventId,
+                                                @Part(Constants.ApiParameters.ScheduledEventSlotCategory.NAME) RequestBody name,
+                                                @Part(Constants.ApiParameters.ScheduledEventSlotCategory.SLOT_ALOTTED) RequestBody slotAlotted,
+                                                @Part(Constants.ApiParameters.ScheduledEventSlotCategory.PRICE) RequestBody price,
+                                                @Part(Constants.ApiParameters.ScheduledEventSlotCategory.SELECT_SEAT_NUMBER) RequestBody selectSeatNumber,
+                                                @Part MultipartBody.Part image,
+                                                @Header(Constants.ACCEPT) String json);
+
 }

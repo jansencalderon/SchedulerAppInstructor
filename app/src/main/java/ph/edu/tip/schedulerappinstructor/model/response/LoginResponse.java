@@ -4,6 +4,7 @@ package ph.edu.tip.schedulerappinstructor.model.response;
 import com.google.gson.annotations.SerializedName;
 
 import ph.edu.tip.schedulerappinstructor.app.Constants;
+import ph.edu.tip.schedulerappinstructor.model.data.Admin;
 import ph.edu.tip.schedulerappinstructor.model.data.User;
 
 
@@ -14,13 +15,13 @@ import ph.edu.tip.schedulerappinstructor.model.data.User;
 public class LoginResponse extends BasicResponse {
 
     @SerializedName(Constants.DATA)
-    private User user;
+    private Admin admin;
 
-    public User getUser() {
-        return user;
+    public Admin getAdmin() {
+        return admin;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
     }
 }

@@ -27,7 +27,7 @@ public class SlotCategory extends RealmObject {
     @SerializedName("price")
     private String slotPrice;
     @SerializedName("slot_image")
-    private String slot_image;
+    private String slotImage;
      @SerializedName("select_seat_number")
     private String isSeatTrue;
 
@@ -88,22 +88,12 @@ public class SlotCategory extends RealmObject {
         this.slotPrice = slotPrice;
     }
 
-    public String getSlot_image() {
-        return slot_image;
+
+    public String getSlotImage() {
+        return slotImage;
     }
 
-    public void setSlot_image(String slot_image) {
-        this.slot_image = slot_image;
+    public void setSlotImage(String slotImage) {
+        this.slotImage = slotImage;
     }
-
-
-
-
-
-
-
-
-
-
-
 }

@@ -38,10 +38,9 @@
                 android:background="@drawable/edittext_selector"
                 android:hint="Email Address"
                 android:inputType="textEmailAddress"
-                android:padding="16dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:padding="10dp"
                 android:textColor="@android:color/black"
-                android:textColorHint="@android:color/black" />
+                android:textColorHint="@color/lightestGray" />
 
             <EditText
                 android:id="@+id/et_password"
@@ -52,10 +51,9 @@
                 android:fontFamily="sans-serif"
                 android:hint="Password"
                 android:inputType="textPassword"
-                android:padding="16dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:padding="10dp"
                 android:textColor="@android:color/black"
-                android:textColorHint="@android:color/black" />
+                android:textColorHint="@color/lightestGray"/>
 
 
             <Button
@@ -81,9 +79,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:onClick="@{() -> view.onForgotPassword()}"
-                android:text="Forgot Password"
+                android:text="Forgot Password?"
+                android:textStyle="italic"
                 android:textAllCaps="false"
-                android:textColor="@color/white" />
+                android:textColor="@color/lightestGray" />
             <!--  <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

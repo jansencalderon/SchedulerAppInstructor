@@ -44,8 +44,8 @@ public class LoginPresenter extends MvpNullObjectBasePresenter<LoginView> {
                         realm.executeTransactionAsync(new Realm.Transaction() {
                             @Override
                             public void execute(Realm realm) {
-                               Log.d("LOGIN", "execute: user image: " + response.body().getUser().getImage());
-                                 realm.copyToRealmOrUpdate(response.body().getUser());
+                                Log.d("LOGIN", "execute: user image: " + response.body().getAdmin().getImage());
+                                realm.copyToRealmOrUpdate(response.body().getAdmin());
                             }
                         }, new Realm.Transaction.OnSuccess() {
                             @Override
@@ -76,7 +76,6 @@ public class LoginPresenter extends MvpNullObjectBasePresenter<LoginView> {
                 getView().showToast(t.getLocalizedMessage());
             }
         });
-
 
 
     }

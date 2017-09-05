@@ -2,7 +2,10 @@ package ph.edu.tip.schedulerappinstructor.model.data;
 
 
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
@@ -14,107 +17,180 @@ import io.realm.annotations.PrimaryKey;
 
 public class Event extends RealmObject {
 
-    @PrimaryKey
+
     @SerializedName("scheduled_event_id")
-    private String id;
+    @Expose
+    @PrimaryKey
+    private Integer scheduledEventId;
     @SerializedName("name")
-    private String eventName;
+    @Expose
+    private String name;
     @SerializedName("description")
-    private String eventDescription;
-    @SerializedName("slot")
-    private String eventSlot;
-    @SerializedName("price")
-    private String eventPrice;
-    @SerializedName("type")
-    private String eventType;
-    @SerializedName("date_start")
-    private String eventDateFrom;
-    @SerializedName("date_end")
-    private String eventDateTo;
-    @SerializedName("time_start")
-    private String eventTimeFrom;
-    @SerializedName("time_end")
-    private String eventTimeTo;
-    @SerializedName("scheduled_event_image")
-    private String imageDirectory;
+    @Expose
+    private String description;
     @SerializedName("location")
+    @Expose
     private String location;
-    @SerializedName("address")
-    private String address;
+    @SerializedName("type")
+    @Expose
+    private String type;
+    @SerializedName("admin_id")
+    @Expose
+    private Integer adminId;
     @SerializedName("lat")
-    private double latitude;
-    @SerializedName("long")
-    private double longitude;
+    @Expose
+    private String lat;
+    @SerializedName("lng")
+    @Expose
+    private String lng;
+    @SerializedName("scheduled_event_image")
+    @Expose
+    private String scheduledEventImage;
+    @SerializedName("address")
+    @Expose
+    private String address;
+    @SerializedName("status")
+    @Expose
+    private String status;
     @SerializedName("company_id")
-    private String companyId;
-    @SerializedName("calendar_desc")
-    private String calendar;
-    @SerializedName("select_seat_number")
-    private String isSeatTrue;
-    @SerializedName("slot_image")
-    private String slotImage;
-    @SerializedName("company_name")
-    private String companyname;
-    @SerializedName("categories")
-    private RealmList<SlotCategory> slotCategory;
+    @Expose
+    private Integer companyId;
+    @SerializedName("created_at")
+    @Expose
+    private String createdAt;
+    @SerializedName("updated_at")
+    @Expose
+    private String updatedAt;
     @SerializedName("tags")
+    @Expose
     private String tags;
+    @SerializedName("company_name")
+    @Expose
+    private String companyName;
+    @SerializedName("calendar")
+    @Expose
+    private RealmList<Calendar> calendar = null;
+    @SerializedName("calendar_desc")
+    @Expose
+    private String calendarDesc;
+    @SerializedName("date_start")
+    @Expose
+    private String dateStart;
+    @SerializedName("categories")
+    @Expose
+    private RealmList<SlotCategory> categories = null;
 
 
-
-
-
-    public RealmList<SlotCategory> getSlotCategory() {
-        return slotCategory;
+    public Integer getScheduledEventId() {
+        return scheduledEventId;
     }
 
-    public void setSlotCategory(RealmList<SlotCategory> slotCategory) {
-        this.slotCategory = slotCategory;
+    public void setScheduledEventId(Integer scheduledEventId) {
+        this.scheduledEventId = scheduledEventId;
     }
 
-
-    public String getIsSeatTrue() {
-        return isSeatTrue;
+    public String getName() {
+        return name;
     }
 
-    public void setIsSeatTrue(String isSeatTrue) {
-        this.isSeatTrue = isSeatTrue;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getSlotImage() {
-        return slotImage;
+    public String getDescription() {
+        return description;
     }
 
-    public void setSlotImage(String slotImage) {
-        this.slotImage = slotImage;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-
-    public String getCompanyname() {
-        return companyname;
+    public String getLocation() {
+        return location;
     }
 
-    public void setCompanyname(String companyname) {
-        this.companyname = companyname;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
-    public String getCalendar() {
-        return calendar;
+    public String getType() {
+        return type;
     }
 
-    public void setCalendar(String calendar) {
-        this.calendar = calendar;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public String getCompanyId() {
+    public Integer getAdminId() {
+        return adminId;
+    }
+
+    public void setAdminId(Integer adminId) {
+        this.adminId = adminId;
+    }
+
+    public String getLat() {
+        return lat;
+    }
+
+    public void setLat(String lat) {
+        this.lat = lat;
+    }
+
+    public String getLng() {
+        return lng;
+    }
+
+    public void setLng(String lng) {
+        this.lng = lng;
+    }
+
+    public String getScheduledEventImage() {
+        return scheduledEventImage;
+    }
+
+    public void setScheduledEventImage(String scheduledEventImage) {
+        this.scheduledEventImage = scheduledEventImage;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Integer getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(String companyId) {
+    public void setCompanyId(Integer companyId) {
         this.companyId = companyId;
     }
-    public String getAddress() {
-        return address;
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public String getTags() {
@@ -124,124 +200,44 @@ public class Event extends RealmObject {
     public void setTags(String tags) {
         this.tags = tags;
     }
-    public void setAddress(String address) {
-        this.address = address;
+
+    public String getCompanyName() {
+        return companyName;
     }
 
-
-    public String getEventSlot() {
-        return eventSlot;
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
-    public void setEventSlot(String eventSlot) {
-        this.eventSlot = eventSlot;
+    public RealmList<Calendar> getCalendar() {
+        return calendar;
     }
 
-    public String getEventPrice() {
-        return eventPrice;
+    public void setCalendar(RealmList<Calendar> calendar) {
+        this.calendar = calendar;
     }
 
-    public void setEventPrice(String eventPrice) {
-        this.eventPrice = eventPrice;
+    public String getCalendarDesc() {
+        return calendarDesc;
     }
 
-    public String getEventType() {
-        return eventType;
+    public void setCalendarDesc(String calendarDesc) {
+        this.calendarDesc = calendarDesc;
     }
 
-    public void setEventType(String eventType) {
-        this.eventType = eventType;
+    public String getDateStart() {
+        return dateStart;
     }
 
-    public String getEventTimeFrom() {
-        return eventTimeFrom;
+    public void setDateStart(String dateStart) {
+        this.dateStart = dateStart;
     }
 
-    public void setEventTimeFrom(String eventTimeFrom) {
-        this.eventTimeFrom = eventTimeFrom;
+    public RealmList<SlotCategory> getCategories() {
+        return categories;
     }
 
-    public String getEventTimeTo() {
-        return eventTimeTo;
+    public void setCategories(RealmList<SlotCategory> categories) {
+        this.categories = categories;
     }
-
-    public void setEventTimeTo(String eventTimeTo) {
-        this.eventTimeTo = eventTimeTo;
-    }
-
-
-    public String getLocation() {
-        return location;
-    }
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getEventId() {
-        return id;
-    }
-
-    public void setEventId(String eventId) {
-        this.id = eventId;
-    }
-    public double getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
-
-    public double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
-
-
-    public String getEventName() {
-        return eventName;
-    }
-
-    public void setEventName(String eventName) {
-        this.eventName = eventName;
-    }
-
-    public String getEventDescription() {
-        return eventDescription;
-    }
-
-    public void setEventDescription(String eventDescription) {
-        this.eventDescription = eventDescription;
-    }
-
-    public String getEventDateFrom() {
-        return eventDateFrom;
-    }
-
-    public void setEventDateFrom(String eventDateFrom) {
-        this.eventDateFrom = eventDateFrom;
-    }
-
-    public String getEventDateTo() {
-        return eventDateTo;
-    }
-
-    public void setEventDateTo(String eventDateTo) {
-        this.eventDateTo = eventDateTo;
-    }
-
-
-    public String getImageDirectory() {
-        return imageDirectory;
-    }
-
-    public void setImageDirectory(String imageDirectory) {
-        this.imageDirectory = imageDirectory;
-    }
-
-
-
 }

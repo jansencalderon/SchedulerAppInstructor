@@ -17,7 +17,9 @@
 
 package ph.edu.tip.schedulerappinstructor.ui.home;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -25,24 +27,36 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.hannesdorfmann.mosby.mvp.MvpFragment;
+
 import ph.edu.tip.schedulerappinstructor.R;
+import ph.edu.tip.schedulerappinstructor.databinding.FragmentHomeBinding;
 
 /**
  * Created by Iiro Krankka (http://github.com/roughike)
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends MvpFragment<HomeView,HomePresenter> implements HomeView {
 
+    private FragmentHomeBinding binding;
     public HomeFragment() {
     }
 
+
     public static HomeFragment newInstance() {
-        HomeFragment sampleFragment = new HomeFragment();
-        return sampleFragment;
+        return new HomeFragment();
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
+        return binding.getRoot();
     }
+
+    @NonNull
+    @Override
+    public HomePresenter createPresenter() {
+        return new HomePresenter();
+    }
+
 }

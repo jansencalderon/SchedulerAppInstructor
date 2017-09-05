@@ -17,31 +17,116 @@
 
 package ph.edu.tip.schedulerappinstructor.ui.profile;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.v4.content.IntentCompat;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.hannesdorfmann.mosby.mvp.MvpFragment;
+
+import io.realm.Realm;
 import ph.edu.tip.schedulerappinstructor.R;
+import ph.edu.tip.schedulerappinstructor.app.Endpoints;
+import ph.edu.tip.schedulerappinstructor.app.RealmQuery;
+import ph.edu.tip.schedulerappinstructor.databinding.FragmentProfileBinding;
+import ph.edu.tip.schedulerappinstructor.model.data.Admin;
+import ph.edu.tip.schedulerappinstructor.ui.login.LoginActivity;
 
 /**
  * Created by Iiro Krankka (http://github.com/roughike)
  */
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends MvpFragment<ProfileView,ProfilePresenter> implements ProfileView{
+
+    private static final String TAG = ProfileFragment.class.getSimpleName();
+    private FragmentProfileBinding binding;
+    private Admin admin;
 
     public ProfileFragment() {
     }
 
     public static ProfileFragment newInstance() {
-        ProfileFragment sampleFragment = new ProfileFragment();
-        return sampleFragment;
+        return new ProfileFragment();
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        admin = RealmQuery.getUser();
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false);
+        binding.setAdmin(admin);
+        binding.setView(getMvpView());
+
+        Glide.with(getActivity()).load(Endpoints.STATIC_IMAGE_URL+admin.getImage()).into(binding.imageView);
+
+
+        return binding.getRoot();
+    }
+
+
+    @NonNull
+    @Override
+    public ProfilePresenter createPresenter() {
+        return new ProfilePresenter();
+    }
+
+    @Override
+    public void onLogOut(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Log Out");
+        builder.setMessage("Are you sure?");
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                // Do nothing but close the dialog
+                final Realm realm = Realm.getDefaultInstance();
+                realm.executeTransactionAsync(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+                        realm.deleteAll();
+                    }
+                }, new Realm.Transaction.OnSuccess() {
+                    @Override
+                    public void onSuccess() {
+                        realm.close();
+                        Intent intent = new Intent(new Intent(getActivity(), LoginActivity.class));
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
+                                        IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        getActivity().finish();
+                    }
+                }, new Realm.Transaction.OnError() {
+                    @Override
+                    public void onError(Throwable error) {
+                        realm.close();
+                        Log.e(TAG, "onError: Error Logging out (deleting all data)", error);
+                    }
+                });
+            }
+        });
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                // Do nothing
+                dialog.dismiss();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    @Override
+    public void showAlert(String s){
+        Toast.makeText(getActivity(), s, Toast.LENGTH_SHORT).show();
     }
 }

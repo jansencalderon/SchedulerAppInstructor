@@ -129,4 +129,12 @@ public static String endTime(Calendar cal) {
         return "error";
     }
 
+
+    public static String toAge(String dateToConvert){
+        String[] arr = dateToConvert.split("-");
+        Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR)-  Integer.parseInt(arr[0]) ;
+        return year+" years old";
+    }
+
 }

@@ -20,7 +20,7 @@ public class Endpoints {
 
 
     //Credentials
-    public static final String LOGIN = "user/login";
+    public static final String LOGIN = "admin/login";
     public static final String REGISTER = "user";
     public static final String CHANGE_PASSWORD = "user/changepass";
     public static final String UPDATE_ACCOUNT = "user/updateacct";
@@ -38,6 +38,7 @@ public class Endpoints {
     public static final String SECURITY_QUESTION = "security-question";
     public static final String SECURITY_QUESTION2 = "security-question";
     public static final String UPLOAD_IMG = "user/updateimage";
+    public static final String STATIC_IMAGE_URL = BASE_URL+"/storage/app/";
 
 
 
@@ -52,9 +53,9 @@ public class Endpoints {
 
     //Events
     public static final String EVENT_URL_IMAGE = BASE_URL + "/storage/app/";
-    public static final String EVENT_LIST = "scheduled_events";
-    public static final String EVENT_DETAIL = "scheduled_events" + "/" + ID;
-    public static final String EVENT_SEAT = "scheduled_events/slot"+ "/" + ID;
+    public static final String EVENT_LIST = "admin_scheduled_events";
+    public static final String EVENT_DETAIL = "admin_scheduled_events" + "/" + ID;
+    public static final String EVENT_SEAT = "admin_scheduled_events/slot"+ "/" + ID;
 
     //Daily
     public static final String DAILY_URL_IMAGE = BASE_URL + "/storage/app/";
@@ -73,6 +74,14 @@ public class Endpoints {
      public static final String TRANSACTIONS_DETAIL = TRANSACTIONS + "/" + ID;
      public static final String TRANSACTIONS_RESERVE = TRANSACTIONS;
 
+
+
+    //scheduled events
+    public static final String CREATE_SCHEDULED_EVENT = "admin_scheduled_events";
+
+
+    //slot category
+    public static final String CREATE_SCHEDULED_EVENT_SLOT_CATEGORY = "scheduled_event_slot_category";
 
 
 }

@@ -1,4 +1,4 @@
-package ph.edu.tip.edu.tip.schedulerappinstructor.instructor.ui.login;
+package ph.edu.tip.schedulerappinstructor.ui.login;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -18,6 +18,7 @@ import io.realm.RealmResults;
 import ph.edu.tip.schedulerappinstructor.BuildConfig;
 import ph.edu.tip.schedulerappinstructor.R;
 import ph.edu.tip.schedulerappinstructor.databinding.ActivityLoginBinding;
+import ph.edu.tip.schedulerappinstructor.model.data.Admin;
 import ph.edu.tip.schedulerappinstructor.model.data.User;
 import ph.edu.tip.schedulerappinstructor.ui.login.LoginPresenter;
 import ph.edu.tip.schedulerappinstructor.ui.login.LoginView;
@@ -46,7 +47,7 @@ public class LoginActivity extends MvpViewStateActivity<LoginView, LoginPresente
         progressDialog.setCancelable(false);
         realm = Realm.getDefaultInstance(); // realm instance for LoginActivity, close on destroy
         // check if already login
-        RealmResults<User> userRealmResults = realm.where(User.class).findAll();
+        RealmResults<Admin> userRealmResults = realm.where(Admin.class).findAll();
         if (userRealmResults.isValid() && userRealmResults.size() > 0) startNewActivity();
     }
 
