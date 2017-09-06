@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -32,7 +33,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal"
             android:weightSum="100">
 
@@ -41,22 +42,21 @@
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight="30"
-                android:scaleType="centerCrop"
-                android:src="@drawable/sample" />
+                android:minWidth="300dp"
+                android:id="@+id/imageView"
+                android:scaleType="centerCrop" />
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="50"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:padding="6dp"
+                android:gravity="start"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
                     android:text='@{""+slot.slotName}'
                     android:textColor="@color/darkGray"
                     android:textSize="16sp"
@@ -65,29 +65,23 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
                     android:layout_marginTop="3dp"
                     android:text='Remaining'
                     android:textColor="@color/darkGray"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
                     android:text='@{slot.slotAvail+" / "+slot.slotAlloted}'
                     android:textColor="@color/hyperlink"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
 
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
                     android:layout_marginTop="3dp"
                     android:text='@{"Php "+slot.slotPrice}'
                     android:textColor="@color/darkGray"

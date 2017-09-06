@@ -12,8 +12,8 @@
             type="ph.edu.tip.schedulerappinstructor.ui.events.detail.EventDetailView" />
 
         <variable
-            name="calendar"
-            type="ph.edu.tip.schedulerappinstructor.model.data.Calendar" />
+            name="sched"
+            type="ph.edu.tip.schedulerappinstructor.model.data.Schedule" />
 
         <variable
             name="contentVisible"
@@ -43,12 +43,12 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:text="@{calendar.date}"
+                    android:text="@{DateTimeUtils.dateToReadable(sched.date)}"
                     android:layout_height="wrap_content" />
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:text="@{calendar.duration}"
+                    android:text='@{DateTimeUtils.stringToAMorPM(sched.timeStart) +" to "+DateTimeUtils.stringToAMorPM(sched.timeEnd) }'
                     android:layout_height="wrap_content" />
             </LinearLayout>
 
@@ -65,7 +65,7 @@
                     android:clickable="true"
                     android:layout_height="wrap_content"
                     android:layout_weight="50"
-                    android:onClick="@{()->view.onCalendarEdit(calendar)}"
+                    android:onClick="@{()->view.onSchedEdit(sched)}"
                     android:background="@drawable/button_accent"
                     android:gravity="center"
                     android:text="EDIT"
@@ -76,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:layout_weight="50"
-                    android:onClick="@{()->view.onCalendarDelete(calendar)}"
+                    android:onClick="@{()->view.onSchedDelete(sched)}"
                     android:background="@drawable/button_red"
                     android:gravity="center"
                     android:text="DELETE"

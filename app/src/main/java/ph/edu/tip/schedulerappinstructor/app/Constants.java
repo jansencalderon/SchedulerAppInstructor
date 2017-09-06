@@ -38,6 +38,8 @@ public class Constants {
 
     public class Realm {
         public static final String EVENT_ID = "scheduledEventId";
+        public static final String SLOT_CATEGORY_ID = "slotCategoryId";
+        public static final String CALENDAR_ID = "calendarId";
     }
 
     public class ApiParameters {
@@ -52,6 +54,7 @@ public class Constants {
             public static final String SCHEDULED_EVENT_TYPE = "type";
             public static final String SCHEDULED_EVENT_TAGS = "tags";
             public static final String SCHEDULED_EVENT_IMAGE = "image";
+            public static final String SCHEDULED_EVENT_ID = "scheduled_event_id";
         }
 
         public class ScheduledEventSlotCategory {
@@ -61,6 +64,22 @@ public class Constants {
             public static final String SELECT_SEAT_NUMBER = "select_seat_number";
             public static final String IMAGE = "image";
             public static final String SCHEDULED_EVENT_ID= "scheduled_event_id";
+            public static final String SLOT_CATEGORY_ID = "slot_category_id";
+        }
+
+        public class ScheduledEventSchedule{
+            public static final String DATE = "date";
+            public static final String TIME_START = "time_start";
+            public static final String TIME_END = "time_end";
+            public static final String SCHEDULED_EVENT_ID = "scheduled_event_id";
+            public static final String SCHED_ID = "calendar_id";
+        }
+
+        public class ScheduleEventAdmin{
+            public static final String POSITION = "position";
+            public static final String DESCRIPTION = "description";
+            public static final String ADMIN_ID = "admin_id";
+            public static final String SCHEDULED_EVENT_ID = "scheduled_event_id";
         }
 
 

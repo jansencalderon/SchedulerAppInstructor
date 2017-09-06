@@ -10,7 +10,7 @@ import io.realm.annotations.PrimaryKey;
  * @author pocholomia
  * @since 12/4/2016
  */
-public class Admin extends RealmObject {
+public class ScheduleEventAdmin extends RealmObject {
 
 
 
@@ -54,7 +54,7 @@ public class Admin extends RealmObject {
 
 
 
-    public Admin() {
+    public ScheduleEventAdmin() {
     }
 
 

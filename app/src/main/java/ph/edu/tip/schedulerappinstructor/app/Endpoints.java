@@ -78,10 +78,24 @@ public class Endpoints {
 
     //scheduled events
     public static final String CREATE_SCHEDULED_EVENT = "admin_scheduled_events";
+    public static final String CHANGE_EVENT_STATUS = "admin_scheduled_events/change_status/{scheduled_event_id}";
 
 
     //slot category
     public static final String CREATE_SCHEDULED_EVENT_SLOT_CATEGORY = "scheduled_event_slot_category";
+    public static final String DELETE_OR_UPDATE_SLOT_CATEGORY = "scheduled_event_slot_category/{slot_category_id}";
+
+
+    //calendar
+    public static final String CREATE_CALENDAR = "scheduled_event_calendar";
+    public static final String DELETE_OR_UPDATE_CALENDAR = "scheduled_event_calendar/{calendar_id}";
+
+    //events instructor
+    public static final String INSTRUCTOR_LIST = "scheduled_event_instructor/{scheduled_event_id}";
+
+    //
+    public static final String COMPANY_INSTRUCTOR = "admin";
+    public static final String ADD_EVENT_INSTRUCTOR = "scheduled_event_admin";
 
 
 }

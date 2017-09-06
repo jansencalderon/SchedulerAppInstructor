@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,8 +30,11 @@ import android.widget.TextView;
 
 import com.hannesdorfmann.mosby.mvp.MvpFragment;
 
+import java.util.List;
+
 import ph.edu.tip.schedulerappinstructor.R;
 import ph.edu.tip.schedulerappinstructor.databinding.FragmentHomeBinding;
+import ph.edu.tip.schedulerappinstructor.model.data.Event;
 
 /**
  * Created by Iiro Krankka (http://github.com/roughike)
@@ -50,7 +54,20 @@ public class HomeFragment extends MvpFragment<HomeView,HomePresenter> implements
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
+        binding.swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                presenter.load();
+            }
+        });
         return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        presenter.onStart();
+        presenter.load();
     }
 
     @NonNull
@@ -59,4 +76,30 @@ public class HomeFragment extends MvpFragment<HomeView,HomePresenter> implements
         return new HomePresenter();
     }
 
+    @Override
+    public void setData(List<Event> events) {
+        binding.schedEventCount.setText(events.size()+"");
+    }
+
+    @Override
+    public void stopLoading() {
+        binding.swipeRefreshLayout.setRefreshing(false);
+
+    }
+
+    @Override
+    public void showAlert(String s) {
+
+    }
+
+    @Override
+    public void startLoading() {
+        binding.swipeRefreshLayout.setRefreshing(true);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.onStop();
+    }
 }

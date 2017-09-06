@@ -12,6 +12,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import com.bumptech.glide.annotation.GlideModule;
+import com.bumptech.glide.module.AppGlideModule;
 
 
 public class App extends Application {
@@ -58,7 +60,7 @@ public class App extends Application {
         if (retrofit == null) {
 
             Gson gson = new GsonBuilder()
-                    .setDateFormat(Constants.YYYY_MM_DD_T_HH_MM_SS)
+                    .setDateFormat("yyyy-MM-dd")
                     .create();
 
             String url = Endpoints.API_URL;

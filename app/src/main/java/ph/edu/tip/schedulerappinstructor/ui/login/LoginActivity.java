@@ -15,14 +15,9 @@ import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
-import ph.edu.tip.schedulerappinstructor.BuildConfig;
 import ph.edu.tip.schedulerappinstructor.R;
 import ph.edu.tip.schedulerappinstructor.databinding.ActivityLoginBinding;
 import ph.edu.tip.schedulerappinstructor.model.data.Admin;
-import ph.edu.tip.schedulerappinstructor.model.data.User;
-import ph.edu.tip.schedulerappinstructor.ui.login.LoginPresenter;
-import ph.edu.tip.schedulerappinstructor.ui.login.LoginView;
-import ph.edu.tip.schedulerappinstructor.ui.login.LoginViewState;
 import ph.edu.tip.schedulerappinstructor.ui.main.MainActivity;
 public class LoginActivity extends MvpViewStateActivity<LoginView, LoginPresenter> implements LoginView {
 

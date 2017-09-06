@@ -1,6 +1,7 @@
 package ph.edu.tip.schedulerappinstructor.ui.events;
 
 import android.databinding.DataBindingUtil;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.AndroidRuntimeException;
 import android.view.LayoutInflater;
@@ -59,6 +60,15 @@ public class EventsListAdapter extends RecyclerView.Adapter<EventsListAdapter.Vi
                     .into(holder.binding.eventImage);
         }catch (AndroidRuntimeException e){
             e.printStackTrace();
+        }
+
+        if(event.getStatus().equals("O")){
+            holder.binding.status.setText("Open");
+            holder.binding.status.setBackgroundColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.greenSuccess));
+        }
+        if(event.getStatus().equals("P")){
+            holder.binding.status.setText("Posted");
+            holder.binding.status.setBackgroundColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.redFailed));
         }
 
 

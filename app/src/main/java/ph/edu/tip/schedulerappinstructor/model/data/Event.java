@@ -5,8 +5,6 @@ package ph.edu.tip.schedulerappinstructor.model.data;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -69,7 +67,7 @@ public class Event extends RealmObject {
     private String companyName;
     @SerializedName("calendar")
     @Expose
-    private RealmList<Calendar> calendar = null;
+    private RealmList<Schedule> calendar = null;
     @SerializedName("calendar_desc")
     @Expose
     private String calendarDesc;
@@ -79,6 +77,11 @@ public class Event extends RealmObject {
     @SerializedName("categories")
     @Expose
     private RealmList<SlotCategory> categories = null;
+
+    @SerializedName("scheduled_event_admin")
+    @Expose
+    private RealmList<ScheduleEventAdmin> admins = null;
+
 
 
     public Integer getScheduledEventId() {
@@ -209,11 +212,11 @@ public class Event extends RealmObject {
         this.companyName = companyName;
     }
 
-    public RealmList<Calendar> getCalendar() {
+    public RealmList<Schedule> getCalendar() {
         return calendar;
     }
 
-    public void setCalendar(RealmList<Calendar> calendar) {
+    public void setCalendar(RealmList<Schedule> calendar) {
         this.calendar = calendar;
     }
 
@@ -239,5 +242,13 @@ public class Event extends RealmObject {
 
     public void setCategories(RealmList<SlotCategory> categories) {
         this.categories = categories;
+    }
+
+    public RealmList<ScheduleEventAdmin> getAdmins() {
+        return admins;
+    }
+
+    public void setAdmins(RealmList<ScheduleEventAdmin> admins) {
+        this.admins = admins;
     }
 }

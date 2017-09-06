@@ -20,5 +20,5 @@ public interface EventAddView extends MvpView{
     void onPickLocation();
     void onRemoveLocation();
 
-    void onSuccess();
+    void onSuccess(int eventId);
 }

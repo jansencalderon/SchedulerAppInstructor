@@ -5,6 +5,9 @@ import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import java.util.List;
 
 import io.realm.Realm;
+import io.realm.RealmChangeListener;
+import io.realm.RealmResults;
+import ph.edu.tip.schedulerappinstructor.R;
 import ph.edu.tip.schedulerappinstructor.app.App;
 import ph.edu.tip.schedulerappinstructor.app.Constants;
 import ph.edu.tip.schedulerappinstructor.app.RealmQuery;
@@ -18,8 +21,25 @@ import retrofit2.Response;
  */
 
 public class EventsPresenter extends MvpBasePresenter<EventsView> {
+    private Realm realm;
+    private RealmResults<Event> eventRealmResults;
 
+    void onStart(){
+        realm = Realm.getDefaultInstance();
 
+        eventRealmResults = realm.where(Event.class).findAll();
+        eventRealmResults.addChangeListener(new RealmChangeListener<RealmResults<Event>>() {
+            @Override
+            public void onChange(RealmResults<Event> events) {
+                setList();
+            }
+        });
+    }
+
+    void onStop(){
+        realm.close();
+        eventRealmResults.removeAllChangeListeners();
+    }
     void load() {
         if (isViewAttached()) {
             getView().startLoad();
@@ -57,7 +77,7 @@ public class EventsPresenter extends MvpBasePresenter<EventsView> {
                             });
                         } else {
                             if (isViewAttached())
-                                getView().showError(response.errorBody().toString());
+                                getView().showError(String.valueOf(R.string.oops));
                         }
                     }
 
@@ -66,17 +86,23 @@ public class EventsPresenter extends MvpBasePresenter<EventsView> {
                         t.printStackTrace();
                         if (isViewAttached()) {
                             getView().stopLoad();
-                            getView().showError(t.getLocalizedMessage());
+                            getView().showError(String.valueOf(R.string.oops));
                         }
                     }
                 });
     }
 
+
     private void setList() {
-        final Realm realm = Realm.getDefaultInstance();
-        getView().setData(realm.copyFromRealm(realm.where(Event.class).findAll()));
-        realm.close();
+        if(isViewAttached()){
+            if(eventRealmResults.isValid()){
+                getView().setData(realm.copyFromRealm(eventRealmResults));
+            }
+        }
     }
 
 
+    public void refreshLocalData() {
+        setList();
+    }
 }

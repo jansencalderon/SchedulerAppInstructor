@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="view"
+            type="ph.edu.tip.schedulerappinstructor.ui.events.detail.EventDetailView"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:minWidth="300dp"
+        android:orientation="vertical"
+        android:padding="10dp"
+        app:paddingEnd="6dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Schedule"
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <com.github.badoualy.datepicker.DatePickerTimeline
+                android:id="@+id/schedDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/schedDateReadable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="CHOOSE DATE"
+                android:inputType="numberDecimal"
+                android:layout_gravity="center"
+                android:padding="6dp"
+                android:textStyle="bold"
+                android:textColorHint="@color/lightestGray"
+                android:textSize="24sp" />
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Time Start"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/schedTimeStart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:gravity="center"
+                        android:hint="0:00 AM/PM"
+                        android:inputType="numberDecimal"
+                        android:onClick="@{()->view.onSchedTimeStart()}"
+                        android:padding="6dp"
+                        android:textColorHint="@color/lightestGray"
+                        android:textSize="24sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Time End"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/schedTimeEnd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:gravity="center"
+                        android:hint="0:00 AM/PM"
+                        android:inputType="number"
+                        android:onClick="@{()->view.onSchedTimeEnd()}"
+                        android:padding="6dp"
+                        android:textColorHint="@color/lightestGray"
+                        android:textSize="24sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="end"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_button_stroke"
+                android:clickable="true"
+                android:padding="8dp"
+                android:paddingEnd="20dp"
+                android:paddingStart="20dp"
+                android:text="CANCEL"
+                android:textColor="@color/gray"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/rounded_button_solid"
+                android:clickable="true"
+                android:padding="8dp"
+                android:paddingEnd="20dp"
+                android:paddingStart="20dp"
+                android:text="ADD"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</layout>

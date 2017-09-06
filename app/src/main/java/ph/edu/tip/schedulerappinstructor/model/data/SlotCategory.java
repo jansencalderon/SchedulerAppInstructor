@@ -16,8 +16,7 @@ public class SlotCategory extends RealmObject {
 
     @SerializedName("slot_category_id")
     @PrimaryKey
-    private int id;
-
+    private int slotCategoryId;
     @SerializedName("slot_name")
     private String slotName;
     @SerializedName("no_slot_allotted")
@@ -55,13 +54,12 @@ public class SlotCategory extends RealmObject {
     }
 
 
-
-    public int getId() {
-        return id;
+    public int getSlotCategoryId() {
+        return slotCategoryId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setSlotCategoryId(int slotCategoryId) {
+        this.slotCategoryId = slotCategoryId;
     }
 
     public String getSlotName() {

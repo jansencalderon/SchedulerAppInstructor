@@ -26,7 +26,9 @@ import java.io.File;
 
 import io.realm.Realm;
 import ph.edu.tip.schedulerappinstructor.R;
+import ph.edu.tip.schedulerappinstructor.app.Constants;
 import ph.edu.tip.schedulerappinstructor.databinding.ActivityEventAddBinding;
+import ph.edu.tip.schedulerappinstructor.ui.events.detail.EventDetailActivity;
 import ph.edu.tip.schedulerappinstructor.util.TagsManipulator;
 import pl.aprilapps.easyphotopicker.DefaultCallback;
 import pl.aprilapps.easyphotopicker.EasyImage;
@@ -144,8 +146,10 @@ public class EventAddActivity extends MvpActivity<EventAddView, EventAddPresente
     }
 
     @Override
-    public void onSuccess() {
-        finish();
+    public void onSuccess(int eventId) {
+        Intent intent = new Intent(EventAddActivity.this, EventDetailActivity.class);
+        intent.putExtra(Constants.ID, eventId);
+        startActivity(intent);
     }
 
     @Override

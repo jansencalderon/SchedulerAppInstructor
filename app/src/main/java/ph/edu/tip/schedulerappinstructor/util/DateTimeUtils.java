@@ -3,6 +3,7 @@ package ph.edu.tip.schedulerappinstructor.util;
 import android.util.Log;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -35,10 +36,6 @@ public static String endTime(Calendar cal) {
 
     public static String timeConvert(String time)
     {
-
-
-
-
 
         try {
             final SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
@@ -113,7 +110,6 @@ public static String endTime(Calendar cal) {
 
     public static String toReadable(String dateToConvert){
         String convertedDate;
-        //String[] arr = dateToConvert.split(" ");
         DateFormat targetFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
         Date date = null;
         try {
@@ -130,6 +126,30 @@ public static String endTime(Calendar cal) {
     }
 
 
+    public static String dateToReadable(Date dateToConvert) {
+        /*String convertedDate;
+        //String[] arr = dateToConvert.split(" ");
+        DateFormat targetFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",Locale.US);
+        Date date = null;
+        *//*try {
+            date = targetFormat.parse(dateToConvert);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }*/
+        String convertedDate;
+        try {
+
+            SimpleDateFormat formatter = new SimpleDateFormat("E, MMM dd", Locale.US);
+            convertedDate = formatter.format(dateToConvert);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            convertedDate = "";
+        }
+
+        return convertedDate.toUpperCase();
+    }
+
+
     public static String toAge(String dateToConvert){
         String[] arr = dateToConvert.split("-");
         Calendar c = Calendar.getInstance();
@@ -137,4 +157,35 @@ public static String endTime(Calendar cal) {
         return year+" years old";
     }
 
+    public static String dateToAMorPM(Date dateToConvert) {
+        String convertedDate;
+        try {
+
+            SimpleDateFormat formatter = new SimpleDateFormat("h:mm a", Locale.US);
+            convertedDate = formatter.format(dateToConvert);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            convertedDate = "";
+        }
+
+        return convertedDate.toUpperCase();
+    }
+
+    public static String stringToAMorPM(String dateToConvert) {
+        String convertedDate = null;
+        final SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        
+        try {
+            final Date date = sdf.parse(dateToConvert);
+            SimpleDateFormat formatter = new SimpleDateFormat("h:mm a", Locale.US);
+            convertedDate = formatter.format(date);
+        } catch (NullPointerException e ) {
+            e.printStackTrace();
+            convertedDate = "";
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return convertedDate.toUpperCase();
+    }
 }

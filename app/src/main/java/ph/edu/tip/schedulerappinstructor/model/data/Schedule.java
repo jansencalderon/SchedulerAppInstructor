@@ -3,6 +3,8 @@ package ph.edu.tip.schedulerappinstructor.model.data;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -10,7 +12,7 @@ import io.realm.annotations.PrimaryKey;
  * Created by itsodeveloper on 04/09/2017.
  */
 
-public class Calendar extends RealmObject {
+public class Schedule extends RealmObject {
 
     @PrimaryKey
     @SerializedName("calendar_id")
@@ -21,7 +23,7 @@ public class Calendar extends RealmObject {
     private Integer scheduledEventId;
     @SerializedName("date")
     @Expose
-    private String date;
+    private Date date;
     @SerializedName("time_start")
     @Expose
     private String timeStart;
@@ -52,11 +54,11 @@ public class Calendar extends RealmObject {
         this.scheduledEventId = scheduledEventId;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

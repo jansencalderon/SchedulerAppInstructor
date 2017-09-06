@@ -76,160 +76,218 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
+                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{event.name}"
-                    android:textColor="@color/darkGray"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{event.type}"
-                    android:textColor="@color/darkGray"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text='@{"Event by: "+event.companyName}'
-                    android:textColor="@color/darkGray"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="Details"
-                    android:textColor="@color/darkGray"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text='@{event.calendarDesc}'
-                    android:textColor="@color/darkGray"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{event.description}"
-                    android:textColor="@color/darkGray"
-                    android:textSize="14sp" />
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="Venue"
-                    android:textColor="@color/darkGray"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-
-                <TextView
-                    android:id="@+id/imgLocation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text='@{event.location+" "}'
-                    android:textColor="@color/darkGray"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="start"
-                    android:text="@{event.address}"
-                    android:textColor="@color/darkGray"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="Schedules"
-                    android:textColor="@color/darkGray"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recyclerViewCalendar"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp" />
+                    android:weightSum="100"
+                    android:background="@color/greenSuccess"
+                    android:id="@+id/statusPanel"
+                    android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/addSchedule"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/rounded_slight_accent"
-                    android:drawableEnd="@drawable/ic_add_white"
-                    android:onClick="@{()->view.onAddSchedule()}"
-                    android:paddingEnd="10dp"
-                    android:paddingStart="16dp"
-                    android:text="ADD SCHEDULE"
-                    android:textColor="@color/white"
-                    android:textSize="14sp" />
+                    <TextView
+                        android:id="@+id/status"
+                        android:layout_weight="50"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:paddingStart="10dp"
+                        android:textSize="18sp"
+                        android:text="OPEN"
+                        android:textColor="@color/white" />
 
+                    <android.support.v7.widget.SwitchCompat
+                        android:layout_weight="50.09"
+                        android:layout_marginEnd="10dp"
+                        android:id="@+id/statusSwitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="end" />
+                </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="Slot Type"
-                    android:textColor="@color/darkGray"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recyclerViewSlots"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp" />
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-                <Button
-                    android:id="@+id/addSlotType"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/rounded_slight_accent"
-                    android:drawableEnd="@drawable/ic_add_white"
-                    android:onClick="@{()->view.onAddSlotType()}"
-                    android:paddingEnd="10dp"
-                    android:paddingStart="16dp"
-                    android:text="ADD SLOT TYPE"
-                    android:textColor="@color/white"
-                    android:textSize="14sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{event.name}"
+                        android:textColor="@color/darkGray"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
-
-                <TextView
-                    android:id="@+id/viewAdmin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text='View Instructors'
-                    android:textColor="@color/hyperlink"
-                    android:textSize="18sp"
-                    android:visibility="gone" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{event.type}"
+                        android:textColor="@color/darkGray"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text='@{"Event by: "+event.companyName}'
+                        android:textColor="@color/darkGray"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="Details"
+                        android:textColor="@color/darkGray"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text='@{event.calendarDesc}'
+                        android:textColor="@color/darkGray"
+                        android:textSize="14sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{event.description}"
+                        android:textColor="@color/darkGray"
+                        android:textSize="14sp" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="Venue"
+                        android:textColor="@color/darkGray"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:id="@+id/imgLocation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text='@{event.location+" "}'
+                        android:textColor="@color/darkGray"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:text="@{event.address}"
+                        android:textColor="@color/darkGray"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="Schedules"
+                        android:textColor="@color/darkGray"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerViewCalendar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp" />
+
+                    <Button
+                        android:id="@+id/addSchedule"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/rounded_slight_accent"
+                        android:drawableEnd="@drawable/ic_add_white"
+                        android:onClick="@{()->view.onAddSchedule()}"
+                        android:paddingEnd="10dp"
+                        android:paddingStart="16dp"
+                        android:text="ADD SCHEDULE"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="Slot Type"
+                        android:textColor="@color/darkGray"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerViewSlots"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp" />
+
+                    <Button
+                        android:id="@+id/addSlotType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_gravity="end"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/rounded_slight_accent"
+                        android:drawableEnd="@drawable/ic_add_white"
+                        android:onClick="@{()->view.onAddSlotType()}"
+                        android:paddingEnd="10dp"
+                        android:paddingStart="16dp"
+                        android:text="ADD SLOT TYPE"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="Instructors"
+                        android:textColor="@color/darkGray"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerViewAdmins"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp" />
+
+                    <Button
+                        android:id="@+id/addInstructor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_gravity="end"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/rounded_slight_accent"
+                        android:drawableEnd="@drawable/ic_add_white"
+                        android:onClick="@{()->view.onAddInstructor()}"
+                        android:paddingEnd="10dp"
+                        android:paddingStart="16dp"
+                        android:text="ADD INSTRUCTOR"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+
+                </LinearLayout>
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
 

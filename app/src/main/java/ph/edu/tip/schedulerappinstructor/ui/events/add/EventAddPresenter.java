@@ -1,9 +1,6 @@
 package ph.edu.tip.schedulerappinstructor.ui.events.add;
 
 
-import android.support.annotation.NonNull;
-import android.util.Log;
-
 import com.google.android.gms.location.places.Place;
 import com.hannesdorfmann.mosby.mvp.MvpNullObjectBasePresenter;
 
@@ -13,12 +10,11 @@ import io.realm.Realm;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import ph.edu.tip.schedulerappinstructor.R;
 import ph.edu.tip.schedulerappinstructor.app.App;
 import ph.edu.tip.schedulerappinstructor.app.Constants;
 import ph.edu.tip.schedulerappinstructor.app.RealmQuery;
 import ph.edu.tip.schedulerappinstructor.model.data.Admin;
-import ph.edu.tip.schedulerappinstructor.model.response.BasicResponse;
+import ph.edu.tip.schedulerappinstructor.model.response.ScheduledEventResponse;
 import ph.edu.tip.schedulerappinstructor.util.RequestBodyCreate;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -67,29 +63,46 @@ public class EventAddPresenter extends MvpNullObjectBasePresenter<EventAddView> 
                     RequestBodyCreate.createPartFromString(type),
                     RequestBodyCreate.createPartFromString(tags),
                     body,
-                    Constants.APPJSON).enqueue(new Callback<BasicResponse>() {
-                @Override
-                public void onResponse(Call<BasicResponse> call, Response<BasicResponse> response) {
-                    getView().stopLoading();
-                    if (response.isSuccessful()) {
-                        if (response.body().isSuccess()) {
-                            getView().onSuccess();
-                            getView().showAlert(response.body().getMessage());
-                        } else {
-                            getView().showAlert(response.body().getMessage());
-                        }
-                    } else {
-                        getView().showAlert("Server Error");
-                    }
-                }
+                    Constants.APPJSON).enqueue(new Callback<ScheduledEventResponse>() {
+                                                   @Override
+                                                   public void onResponse(Call<ScheduledEventResponse> call, final Response<ScheduledEventResponse> response) {
+                                                       getView().stopLoading();
+                                                       if (response.body().isSuccess()) {
+                                                           final Realm realm = Realm.getDefaultInstance();
+                                                           realm.executeTransactionAsync(new Realm.Transaction() {
+                                                               @Override
+                                                               public void execute(Realm realm) {
+                                                                   realm.copyToRealmOrUpdate(response.body().getEvent());
+                                                               }
+                                                           }, new Realm.Transaction.OnSuccess() {
+                                                               @Override
+                                                               public void onSuccess() {
+                                                                   realm.close();
+                                                                   getView().onSuccess(response.body().getEvent().getScheduledEventId());
+                                                                   getView().showAlert(response.body().getMessage());
+                                                               }
+                                                           }, new Realm.Transaction.OnError() {
+                                                               @Override
+                                                               public void onError(Throwable error) {
+                                                                   realm.close();
+                                                                   error.printStackTrace();
+                                                                   getView().showAlert(error.getLocalizedMessage());
+                                                               }
+                                                           });
 
-                @Override
-                public void onFailure(Call<BasicResponse> call, Throwable t) {
-                    t.printStackTrace();
-                    getView().stopLoading();
-                    getView().showAlert(t.getLocalizedMessage());
-                }
-            });
+                                                       } else {
+                                                           getView().showAlert(response.body().getMessage());
+                                                       }
+                                                   }
+
+                                                   @Override
+                                                   public void onFailure(Call<ScheduledEventResponse> call, Throwable t) {
+                                                       getView().stopLoading();
+                                                       t.printStackTrace();
+                                                       getView().showAlert(t.getLocalizedMessage());
+                                                   }
+                                               }
+            );
         }
 
 

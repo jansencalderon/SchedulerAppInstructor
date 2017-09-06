@@ -45,19 +45,20 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                <ImageView
-                    android:id="@+id/eventImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:background="@color/lightGray"
-                    android:onClick="@{()->view.onPhotoClicked()}"
-                    android:scaleType="centerCrop" />
+
+                    <ImageView
+                        android:id="@+id/eventImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:background="@color/lightGray"
+                        android:onClick="@{()->view.onPhotoClicked()}"
+                        android:scaleType="centerCrop" />
 
                     <TextView
                         android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="TAP TO EDIT"
-                        android:layout_height="wrap_content" />
+                        android:text="TAP TO EDIT" />
                 </FrameLayout>
 
                 <LinearLayout
@@ -159,7 +160,8 @@
                     android:id="@+id/addLocation"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:layout_gravity="center"
+                    android:layout_gravity="end"
+                    android:layout_marginBottom="20dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/rounded_slight_accent"
                     android:drawableEnd="@drawable/ic_add_white"

@@ -17,6 +17,7 @@
 
 package ph.edu.tip.schedulerappinstructor.ui.events;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -72,7 +73,6 @@ public class EventsFragment extends MvpViewStateFragment<EventsView, EventsPrese
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_events, container, false);
         binding.setView(getMvpView());
-
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new EventsListAdapter(getMvpView());
         binding.recyclerView.setAdapter(adapter);
@@ -87,17 +87,20 @@ public class EventsFragment extends MvpViewStateFragment<EventsView, EventsPrese
         return binding.getRoot();
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        presenter.load();
-    }
 
 
     @NonNull
     @Override
     public EventsPresenter createPresenter() {
         return new EventsPresenter();
+    }
+
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        presenter.onStart();
+        presenter.load();
     }
 
     @Override
@@ -146,4 +149,9 @@ public class EventsFragment extends MvpViewStateFragment<EventsView, EventsPrese
 
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.onStop();
+    }
 }

@@ -6,7 +6,13 @@ import java.util.Map;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import ph.edu.tip.schedulerappinstructor.model.data.ScheduleEventAdmin;
+import ph.edu.tip.schedulerappinstructor.model.response.ScheduleEventAdminResponse;
+import ph.edu.tip.schedulerappinstructor.model.response.ScheduleResponse;
+import ph.edu.tip.schedulerappinstructor.model.response.ScheduledEventResponse;
+import ph.edu.tip.schedulerappinstructor.model.response.SlotCategoryResponse;
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
@@ -156,30 +162,85 @@ public interface ApiInterface {
 
 
     //scheduled events
-
+    //TODO: Events CRUD
     @Multipart
     @POST(Endpoints.CREATE_SCHEDULED_EVENT)
-    Call<BasicResponse> createEvent(@Header(Constants.AUTHORIZATION) String authorization,
-                                    @Part(Constants.ApiParameters.ScheduledEvents.SCHEDULED_EVENT_NAME) RequestBody name,
-                                    @Part(Constants.ApiParameters.ScheduledEvents.SCHEDULED_EVENT_DESC) RequestBody desc,
-                                    @Part(Constants.ApiParameters.ScheduledEvents.SCHEDULED_EVENT_LOC) RequestBody location,
-                                    @Part(Constants.ApiParameters.ScheduledEvents.SCHEDULED_EVENT_ADD) RequestBody address,
-                                    @Part(Constants.ApiParameters.ScheduledEvents.SCHEDULED_EVENT_LAT) RequestBody lat,
-                                    @Part(Constants.ApiParameters.ScheduledEvents.SCHEDULED_EVENT_LNG) RequestBody lng,
-                                    @Part(Constants.ApiParameters.ScheduledEvents.SCHEDULED_EVENT_TYPE) RequestBody type,
-                                    @Part(Constants.ApiParameters.ScheduledEvents.SCHEDULED_EVENT_TAGS) RequestBody tags,
-                                    @Part MultipartBody.Part image,
-                                    @Header(Constants.ACCEPT) String json);
+    Call<ScheduledEventResponse> createEvent(@Header(Constants.AUTHORIZATION) String authorization,
+                                             @Part(Constants.ApiParameters.ScheduledEvents.SCHEDULED_EVENT_NAME) RequestBody name,
+                                             @Part(Constants.ApiParameters.ScheduledEvents.SCHEDULED_EVENT_DESC) RequestBody desc,
+                                             @Part(Constants.ApiParameters.ScheduledEvents.SCHEDULED_EVENT_LOC) RequestBody location,
+                                             @Part(Constants.ApiParameters.ScheduledEvents.SCHEDULED_EVENT_ADD) RequestBody address,
+                                             @Part(Constants.ApiParameters.ScheduledEvents.SCHEDULED_EVENT_LAT) RequestBody lat,
+                                             @Part(Constants.ApiParameters.ScheduledEvents.SCHEDULED_EVENT_LNG) RequestBody lng,
+                                             @Part(Constants.ApiParameters.ScheduledEvents.SCHEDULED_EVENT_TYPE) RequestBody type,
+                                             @Part(Constants.ApiParameters.ScheduledEvents.SCHEDULED_EVENT_TAGS) RequestBody tags,
+                                             @Part MultipartBody.Part image,
+                                             @Header(Constants.ACCEPT) String json);
 
     @Multipart
     @POST(Endpoints.CREATE_SCHEDULED_EVENT_SLOT_CATEGORY)
-    Call<BasicResponse> createEventSlotCategory(@Header(Constants.AUTHORIZATION) String authorization,
-                                                @Part(Constants.ApiParameters.ScheduledEventSlotCategory.SCHEDULED_EVENT_ID) RequestBody scheduledEventId,
-                                                @Part(Constants.ApiParameters.ScheduledEventSlotCategory.NAME) RequestBody name,
-                                                @Part(Constants.ApiParameters.ScheduledEventSlotCategory.SLOT_ALOTTED) RequestBody slotAlotted,
-                                                @Part(Constants.ApiParameters.ScheduledEventSlotCategory.PRICE) RequestBody price,
-                                                @Part(Constants.ApiParameters.ScheduledEventSlotCategory.SELECT_SEAT_NUMBER) RequestBody selectSeatNumber,
-                                                @Part MultipartBody.Part image,
-                                                @Header(Constants.ACCEPT) String json);
+    Call<SlotCategoryResponse> createEventSlotCategory(@Header(Constants.AUTHORIZATION) String authorization,
+                                                       @Part(Constants.ApiParameters.ScheduledEventSlotCategory.SCHEDULED_EVENT_ID) RequestBody scheduledEventId,
+                                                       @Part(Constants.ApiParameters.ScheduledEventSlotCategory.NAME) RequestBody name,
+                                                       @Part(Constants.ApiParameters.ScheduledEventSlotCategory.SLOT_ALOTTED) RequestBody slotAlotted,
+                                                       @Part(Constants.ApiParameters.ScheduledEventSlotCategory.PRICE) RequestBody price,
+                                                       @Part(Constants.ApiParameters.ScheduledEventSlotCategory.SELECT_SEAT_NUMBER) RequestBody selectSeatNumber,
+                                                       @Part MultipartBody.Part image,
+                                                       @Header(Constants.ACCEPT) String json);
+
+    @PUT(Endpoints.CHANGE_EVENT_STATUS)
+    Call<BasicResponse> changeEventStatus(@Header(Constants.AUTHORIZATION) String authorization,
+                                          @Path(Constants.ApiParameters.ScheduledEvents.SCHEDULED_EVENT_ID) String scheduledEventId,
+                                          @Header(Constants.ACCEPT) String json);
+
+    //slot category
+    @Multipart
+    @PUT(Endpoints.DELETE_OR_UPDATE_SLOT_CATEGORY)
+    Call<SlotCategoryResponse> updateSlotCategory(@Header(Constants.AUTHORIZATION) String authorization,
+                                                  @Path(Constants.ApiParameters.ScheduledEventSlotCategory.SLOT_CATEGORY_ID) String slotCategoryId,
+                                                  @Part(Constants.ApiParameters.ScheduledEventSlotCategory.NAME) RequestBody name,
+                                                  @Part(Constants.ApiParameters.ScheduledEventSlotCategory.SLOT_ALOTTED) RequestBody slotAlotted,
+                                                  @Part(Constants.ApiParameters.ScheduledEventSlotCategory.PRICE) RequestBody price,
+                                                  @Part(Constants.ApiParameters.ScheduledEventSlotCategory.SELECT_SEAT_NUMBER) RequestBody selectSeatNumber,
+                                                  @Part MultipartBody.Part image,
+                                                  @Header(Constants.ACCEPT) String json);
+
+
+    @DELETE(Endpoints.DELETE_OR_UPDATE_SLOT_CATEGORY)
+    Call<BasicResponse> deleteSlotCategory(@Header(Constants.AUTHORIZATION) String authorization,
+                                           @Path(Constants.ApiParameters.ScheduledEventSlotCategory.SLOT_CATEGORY_ID) String slotCategoryId,
+                                           @Header(Constants.ACCEPT) String json);
+
+
+    //calendar
+    @FormUrlEncoded
+    @POST(Endpoints.CREATE_CALENDAR)
+    Call<ScheduleResponse> createEventSched(@Header(Constants.AUTHORIZATION) String authorization,
+                                            @FieldMap Map<String, String> params,
+                                            @Header(Constants.ACCEPT) String json);
+
+    @FormUrlEncoded
+    @PUT(Endpoints.DELETE_OR_UPDATE_CALENDAR)
+    Call<ScheduleResponse> updateEventSched(@Header(Constants.AUTHORIZATION) String authorization,
+                                            @Path(Constants.ApiParameters.ScheduledEventSchedule.SCHED_ID) String schedId,
+                                            @FieldMap Map<String, String> params,
+                                            @Header(Constants.ACCEPT) String json);
+
+    @DELETE(Endpoints.DELETE_OR_UPDATE_CALENDAR)
+    Call<BasicResponse> deleteEventSched(@Header(Constants.AUTHORIZATION) String authorization,
+                                         @Path(Constants.ApiParameters.ScheduledEventSchedule.SCHED_ID) String schedId,
+                                         @Header(Constants.ACCEPT) String json);
+
+
+    //scheduled event instructor
+    @GET(Endpoints.COMPANY_INSTRUCTOR)
+    Call<List<ScheduleEventAdmin>> getInstructors(@Header(Constants.AUTHORIZATION) String authorization,
+                                                  @Header(Constants.ACCEPT) String json);
+
+    @FormUrlEncoded
+    @POST(Endpoints.ADD_EVENT_INSTRUCTOR)
+    Call<ScheduleEventAdminResponse> addInstructor(@Header(Constants.AUTHORIZATION) String authorization,
+                                                   @FieldMap Map<String, String> params,
+                                                   @Header(Constants.ACCEPT) String json);
 
 }

@@ -13,6 +13,7 @@ import java.util.List;
 
 import ph.edu.tip.schedulerappinstructor.R;
 import ph.edu.tip.schedulerappinstructor.app.Endpoints;
+import ph.edu.tip.schedulerappinstructor.app.GlideApp;
 import ph.edu.tip.schedulerappinstructor.databinding.ItemSlotCategoryBinding;
 import ph.edu.tip.schedulerappinstructor.model.data.SlotCategory;
 
@@ -51,7 +52,7 @@ public class SlotCategoryListAdapter extends RecyclerView.Adapter<SlotCategoryLi
         SlotCategory slot = list.get(position);
         holder.itemSlotCategoryBinding.setSlot(slot);
         holder.itemSlotCategoryBinding.setView(view);
-        Glide.with(holder.itemView.getContext()).load(Endpoints.EVENT_URL_IMAGE+slot.getSlotImage());
+        GlideApp.with(holder.itemView.getContext()).load(Endpoints.EVENT_URL_IMAGE+slot.getSlotImage()).into(holder.itemSlotCategoryBinding.imageView);
 
     }
 

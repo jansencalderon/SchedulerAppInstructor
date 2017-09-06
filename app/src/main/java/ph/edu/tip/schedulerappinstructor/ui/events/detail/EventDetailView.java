@@ -2,10 +2,9 @@ package ph.edu.tip.schedulerappinstructor.ui.events.detail;
 
 import com.hannesdorfmann.mosby.mvp.MvpView;
 
-import java.util.List;
-
-import ph.edu.tip.schedulerappinstructor.model.data.Calendar;
-import ph.edu.tip.schedulerappinstructor.model.data.Event;
+import ph.edu.tip.schedulerappinstructor.model.data.Admin;
+import ph.edu.tip.schedulerappinstructor.model.data.Schedule;
+import ph.edu.tip.schedulerappinstructor.model.data.ScheduleEventAdmin;
 import ph.edu.tip.schedulerappinstructor.model.data.SlotCategory;
 
 /**
@@ -35,9 +34,19 @@ public interface EventDetailView extends MvpView {
     //calendar crud
     void onAddSchedule();
 
-    //calendar crud
-    //slot crud
-    void onCalendarDelete(Calendar cal);
+    void onSchedTimeStart();
 
-    void onCalendarEdit(Calendar cal);
+    void onSchedTimeEnd();
+
+    void onSchedDelete(Schedule sched);
+
+    void onSchedEdit(Schedule sched);
+
+    void onAddInstructor();
+
+    void onEditInstructor(ScheduleEventAdmin eventAdmin);
+
+    void onDeleteInstructor(ScheduleEventAdmin eventAdmin);
+
+    void onChooseInstructor(ScheduleEventAdmin eventAdmin);
 }
