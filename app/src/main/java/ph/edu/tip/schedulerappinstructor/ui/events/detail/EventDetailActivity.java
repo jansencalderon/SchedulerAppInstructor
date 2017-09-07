@@ -171,6 +171,9 @@ public class EventDetailActivity extends MvpActivity<EventDetailView, EventDetai
             case "InstructorListType":
                 showInstructorChooser();
                 break;
+            case "InstructorType":
+                refreshLocalData();
+                break;
             case "AdminType":
                 refreshLocalData();
                 if(dialogInstructorChooser != null && dialogInstructorChooser.isShowing())
@@ -534,8 +537,24 @@ public class EventDetailActivity extends MvpActivity<EventDetailView, EventDetai
     }
 
     @Override
-    public void onDeleteInstructor(ScheduleEventAdmin eventAdmin) {
+    public void onDeleteInstructor(final ScheduleEventAdmin eventAdmin) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Delete");
+        builder.setMessage("Are you sure you want to delete " + eventAdmin.getName() + "?");
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                presenter.onDeleteInstructor(eventAdmin.getAdminId());
+            }
+        });
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
 
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
     @Override

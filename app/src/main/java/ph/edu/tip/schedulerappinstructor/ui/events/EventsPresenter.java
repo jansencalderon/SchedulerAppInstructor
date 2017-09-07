@@ -72,12 +72,12 @@ public class EventsPresenter extends MvpBasePresenter<EventsView> {
                                     realm.close();
                                     error.printStackTrace();
                                     if (isViewAttached())
-                                        getView().showError(error.getLocalizedMessage());
+                                        getView().showError("Oops, something went wrong\nPlease try again");;
                                 }
                             });
                         } else {
                             if (isViewAttached())
-                                getView().showError(String.valueOf(R.string.oops));
+                                getView().showError("Oops, something went wrong\nPlease try again");
                         }
                     }
 
@@ -86,7 +86,7 @@ public class EventsPresenter extends MvpBasePresenter<EventsView> {
                         t.printStackTrace();
                         if (isViewAttached()) {
                             getView().stopLoad();
-                            getView().showError(String.valueOf(R.string.oops));
+                            getView().showError("Oops, something went wrong\nPlease try again");
                         }
                     }
                 });

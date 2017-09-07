@@ -58,9 +58,9 @@ public class EventDetailPresenter extends MvpNullObjectBasePresenter<EventDetail
                             @Override
                             public void execute(Realm realm) {
                                 Event event = realm.where(Event.class).equalTo(Constants.Realm.EVENT_ID, eventId).findFirst();
-                                if(eventStatus.equals("P")){
+                                if (eventStatus.equals("P")) {
                                     event.setStatus("O");
-                                }else {
+                                } else {
                                     event.setStatus("P");
                                 }
                             }
@@ -83,12 +83,14 @@ public class EventDetailPresenter extends MvpNullObjectBasePresenter<EventDetail
                         getView().showAlert(response.body().getMessage());
                     }
                 } else {
-                    getView().showAlert("Server Error");
+                    getView().showError("Oops, something went wrong\nPlease try again");
                 }
             }
+
             @Override
             public void onFailure(Call<BasicResponse> call, Throwable t) {
-
+                t.printStackTrace();
+                getView().showError("Oops, something went wrong\nPlease try again");
             }
         });
     }
@@ -220,7 +222,7 @@ public class EventDetailPresenter extends MvpNullObjectBasePresenter<EventDetail
                             getView().showAlert(response.body().getMessage());
                         }
                     } else {
-                        getView().showAlert("Server Error");
+                        getView().showError("Oops, something went wrong\nPlease try again");
                     }
 
                 }
@@ -229,7 +231,7 @@ public class EventDetailPresenter extends MvpNullObjectBasePresenter<EventDetail
                 public void onFailure(Call<SlotCategoryResponse> call, Throwable t) {
                     t.printStackTrace();
                     getView().stopLoading();
-                    getView().showAlert(t.getLocalizedMessage());
+                    getView().showError("Oops, something went wrong\nPlease try again");
                 }
             });
         }
@@ -280,7 +282,7 @@ public class EventDetailPresenter extends MvpNullObjectBasePresenter<EventDetail
             public void onFailure(Call<BasicResponse> call, Throwable t) {
                 t.printStackTrace();
                 getView().stopLoading();
-                getView().showAlert(t.getLocalizedMessage());
+                getView().showError("Oops, something went wrong\nPlease try again");
             }
         });
     }
@@ -339,7 +341,7 @@ public class EventDetailPresenter extends MvpNullObjectBasePresenter<EventDetail
                 public void onFailure(Call<ScheduleResponse> call, Throwable t) {
                     t.printStackTrace();
                     getView().stopLoading();
-                    getView().showAlert(t.getLocalizedMessage());
+                    getView().showError("Oops, something went wrong\nPlease try again");
                 }
             });
         }
@@ -389,7 +391,7 @@ public class EventDetailPresenter extends MvpNullObjectBasePresenter<EventDetail
             public void onFailure(Call<BasicResponse> call, Throwable t) {
                 t.printStackTrace();
                 getView().stopLoading();
-                getView().showAlert(t.getLocalizedMessage());
+                getView().showError("Oops, something went wrong\nPlease try again");
             }
         });
     }
@@ -495,7 +497,7 @@ public class EventDetailPresenter extends MvpNullObjectBasePresenter<EventDetail
             public void onFailure(Call<List<ScheduleEventAdmin>> call, Throwable t) {
                 t.printStackTrace();
                 getView().stopLoading();
-                getView().showAlert(t.getLocalizedMessage());
+                getView().showError("Oops, something went wrong\nPlease try again");
             }
         });
     }
@@ -509,10 +511,10 @@ public class EventDetailPresenter extends MvpNullObjectBasePresenter<EventDetail
     public void addInstructor(final String eventId, ScheduleEventAdmin admin) {
         getView().startLoading();
         Map<String, String> params = new HashMap<>();
-        params.put(Constants.ApiParameters.ScheduleEventAdmin.POSITION, "Instructor");
-        params.put(Constants.ApiParameters.ScheduleEventAdmin.DESCRIPTION, "Sample Description");
-        params.put(Constants.ApiParameters.ScheduleEventAdmin.ADMIN_ID, admin.getAdminId() + "");
-        params.put(Constants.ApiParameters.ScheduleEventAdmin.SCHEDULED_EVENT_ID, eventId);
+        params.put(Constants.ApiParameters.ScheduledEventAdmin.POSITION, "Instructor");
+        params.put(Constants.ApiParameters.ScheduledEventAdmin.DESCRIPTION, "Sample Description");
+        params.put(Constants.ApiParameters.ScheduledEventAdmin.ADMIN_ID, admin.getAdminId() + "");
+        params.put(Constants.ApiParameters.ScheduledEventAdmin.SCHEDULED_EVENT_ID, eventId);
 
         App.getInstance().getApiInterface().addInstructor(Constants.BEARER + RealmQuery.getUser().getApiToken(),
                 params
@@ -549,10 +551,10 @@ public class EventDetailPresenter extends MvpNullObjectBasePresenter<EventDetail
                             getView().showAlert(response.body().getMessage());
                         }
                     } else {
-                        getView().showAlert("Server Error");
+                        getView().showError("Oops, something went wrong\nPlease try again");
                     }
                 } else {
-                    getView().showAlert("Server Error");
+                    getView().showError("Oops, something went wrong\nPlease try again");
                 }
             }
 
@@ -584,5 +586,54 @@ public class EventDetailPresenter extends MvpNullObjectBasePresenter<EventDetail
         ScheduleEventAdmin update = realm.copyToRealmOrUpdate(admin);
         event.getAdmins().add(update);
 
+    }
+
+    public void onDeleteInstructor(final int eventAdminId) {
+        getView().startLoading();
+        App.getInstance().getApiInterface().deleteInstructor(Constants.BEARER + RealmQuery.getUser().getApiToken(),
+                eventAdminId + ""
+                , Constants.APPJSON).enqueue(new Callback<BasicResponse>() {
+            @Override
+            public void onResponse(Call<BasicResponse> call, final Response<BasicResponse> response) {
+                getView().stopLoading();
+                if (response.isSuccessful()) {
+                    if (response.body().isSuccess()) {
+                        final Realm realm = Realm.getDefaultInstance();
+                        realm.executeTransactionAsync(new Realm.Transaction() {
+                            @Override
+                            public void execute(Realm realm) {
+                                ScheduleEventAdmin admin = realm.where(ScheduleEventAdmin.class).equalTo(Constants.Realm.SCHEDULED_EVENT_ADMIN_ID, eventAdminId).findFirst();
+                                admin.deleteFromRealm();
+                            }
+                        }, new Realm.Transaction.OnSuccess() {
+                            @Override
+                            public void onSuccess() {
+                                realm.close();
+                                getView().onSuccess("InstructorType");
+                                getView().showAlert(response.body().getMessage());
+                            }
+                        }, new Realm.Transaction.OnError() {
+                            @Override
+                            public void onError(Throwable error) {
+                                realm.close();
+                                error.printStackTrace();
+                                getView().showAlert(error.getLocalizedMessage());
+                            }
+                        });
+                    } else {
+                        getView().showAlert(response.body().getMessage());
+                    }
+                } else {
+                    getView().showError("Oops, something went wrong\nPlease try again");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BasicResponse> call, Throwable t) {
+                t.printStackTrace();
+                getView().stopLoading();
+                getView().showError("Oops, something went wrong\nPlease try again");
+            }
+        });
     }
 }

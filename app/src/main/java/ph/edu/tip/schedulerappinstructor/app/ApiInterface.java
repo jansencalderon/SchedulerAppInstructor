@@ -243,4 +243,9 @@ public interface ApiInterface {
                                                    @FieldMap Map<String, String> params,
                                                    @Header(Constants.ACCEPT) String json);
 
+    @DELETE(Endpoints.DELETE_OR_UPDATE_EVENT_INSTRUCTOR)
+    Call<BasicResponse> deleteInstructor(@Header(Constants.AUTHORIZATION) String authorization,
+                                         @Path(Constants.ApiParameters.ScheduledEventAdmin.ID) String eventAdminId,
+                                         @Header(Constants.ACCEPT) String json);
+
 }

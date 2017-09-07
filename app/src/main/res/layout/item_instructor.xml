@@ -49,7 +49,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="50"
+                android:layout_weight="60"
                 android:gravity="center_vertical"
                 android:orientation="vertical"
                 android:padding="10dp">
@@ -88,32 +88,23 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="20"
-                android:gravity="center"
+                android:layout_weight="10"
+                android:gravity="top"
                 android:orientation="vertical"
                 android:weightSum="100">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="50"
-                    android:background="@drawable/button_accent"
-                    android:clickable="true"
-                    android:gravity="center"
-                    android:onClick="@{()->view.onEditInstructor(instructor)}"
-                    android:text="EDIT"
-                    android:textColor="@color/white" />
 
-                <TextView
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="50"
-                    android:background="@drawable/button_red"
-                    android:clickable="true"
-                    android:gravity="center"
-                    android:onClick="@{()->view.onDeleteInstructor(instructor)}"
-                    android:text="DELETE"
-                    android:textColor="@color/white" />
+                    android:background="@drawable/rounded_button_gray"
+                    android:onClick="@{()->view.onDeleteInstructor(instructor)}">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/ic_close_white" />
+                </LinearLayout>
 
 
             </LinearLayout>

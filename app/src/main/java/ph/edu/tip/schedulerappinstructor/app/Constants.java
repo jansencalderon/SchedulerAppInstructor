@@ -40,6 +40,7 @@ public class Constants {
         public static final String EVENT_ID = "scheduledEventId";
         public static final String SLOT_CATEGORY_ID = "slotCategoryId";
         public static final String CALENDAR_ID = "calendarId";
+        public static final String SCHEDULED_EVENT_ADMIN_ID = "adminId";
     }
 
     public class ApiParameters {
@@ -75,10 +76,11 @@ public class Constants {
             public static final String SCHED_ID = "calendar_id";
         }
 
-        public class ScheduleEventAdmin{
+        public class ScheduledEventAdmin{
             public static final String POSITION = "position";
             public static final String DESCRIPTION = "description";
             public static final String ADMIN_ID = "admin_id";
+            public static final String ID = "id";
             public static final String SCHEDULED_EVENT_ID = "scheduled_event_id";
         }
 
