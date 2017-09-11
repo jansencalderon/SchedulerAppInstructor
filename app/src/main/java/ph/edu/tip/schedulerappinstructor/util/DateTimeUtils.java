@@ -20,28 +20,26 @@ public class DateTimeUtils {
     public static final String DATE_NUM_ONLY = "MM.dd.yyyy";
 
 
-
-    public static Calendar toCalendar(Date date){
+    public static Calendar toCalendar(Date date) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         return cal;
     }
 
-public static String endTime(Calendar cal) {
+    public static String endTime(Calendar cal) {
 
-    SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm");
-    return dateFormat.format(cal.getTime());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm");
+        return dateFormat.format(cal.getTime());
 
     }
 
-    public static String timeConvert(String time)
-    {
+    public static String timeConvert(String time) {
 
         try {
             final SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
             final Date dateObj = sdf.parse(time);
 
-           return (new SimpleDateFormat("K:mm a").format(dateObj));
+            return (new SimpleDateFormat("K:mm a").format(dateObj));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -95,20 +93,19 @@ public static String endTime(Calendar cal) {
         return convertDateToString("yyyy-MM-dd", Calendar.getInstance());
     }
 
-    public static String convertTime(String time)
-    {
+    public static String convertTime(String time) {
         try {
             final SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
             final Date dateObj = sdf.parse(time);
             //DateFormat dateFormat = new SimpleDateFormat("hh:mm a");
-           return new SimpleDateFormat("hh:mm a").format(dateObj);
+            return new SimpleDateFormat("hh:mm a").format(dateObj);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return "error";
     }
 
-    public static String toReadable(String dateToConvert){
+    public static String toReadable(String dateToConvert) {
         String convertedDate;
         DateFormat targetFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
         Date date = null;
@@ -116,9 +113,9 @@ public static String endTime(Calendar cal) {
             date = targetFormat.parse(dateToConvert);
 
 
-        SimpleDateFormat formatter = new SimpleDateFormat("E, MMM dd", Locale.US);
-        convertedDate = formatter.format(date);
-        return convertedDate.toUpperCase();
+            SimpleDateFormat formatter = new SimpleDateFormat("E, MMM dd", Locale.US);
+            convertedDate = formatter.format(date);
+            return convertedDate.toUpperCase();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -150,11 +147,11 @@ public static String endTime(Calendar cal) {
     }
 
 
-    public static String toAge(String dateToConvert){
+    public static String toAge(String dateToConvert) {
         String[] arr = dateToConvert.split("-");
         Calendar c = Calendar.getInstance();
-        int year = c.get(Calendar.YEAR)-  Integer.parseInt(arr[0]) ;
-        return year+" years old";
+        int year = c.get(Calendar.YEAR) - Integer.parseInt(arr[0]);
+        return year + " years old";
     }
 
     public static String dateToAMorPM(Date dateToConvert) {
@@ -174,12 +171,12 @@ public static String endTime(Calendar cal) {
     public static String stringToAMorPM(String dateToConvert) {
         String convertedDate = null;
         final SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-        
+
         try {
             final Date date = sdf.parse(dateToConvert);
             SimpleDateFormat formatter = new SimpleDateFormat("h:mm a", Locale.US);
             convertedDate = formatter.format(date);
-        } catch (NullPointerException e ) {
+        } catch (NullPointerException e) {
             e.printStackTrace();
             convertedDate = "";
         } catch (ParseException e) {
@@ -187,5 +184,18 @@ public static String endTime(Calendar cal) {
         }
 
         return convertedDate.toUpperCase();
+    }
+
+    public static Date getDateToday() {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat sdfs = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        String date = sdfs.format(calendar.getTime());
+        Date converted = null;
+        try {
+            converted = sdfs.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return converted;
     }
 }

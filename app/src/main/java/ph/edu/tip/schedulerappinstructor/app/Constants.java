@@ -41,6 +41,15 @@ public class Constants {
         public static final String SLOT_CATEGORY_ID = "slotCategoryId";
         public static final String CALENDAR_ID = "calendarId";
         public static final String SCHEDULED_EVENT_ADMIN_ID = "adminId";
+
+        public static final String CALENDAR_DATE = "date";
+        public static final String EVENT_DATE_START = "dateStart";
+    }
+
+    public class Status {
+        public static final String EVENT_FOR_APPROVAL = "F";
+        public static final String EVENT_POSTED = "P";
+        public static final String EVENT_OPEN = "O";
     }
 
     public class ApiParameters {

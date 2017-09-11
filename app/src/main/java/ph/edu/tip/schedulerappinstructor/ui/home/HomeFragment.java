@@ -17,12 +17,15 @@
 
 package ph.edu.tip.schedulerappinstructor.ui.home;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,8 +36,10 @@ import com.hannesdorfmann.mosby.mvp.MvpFragment;
 import java.util.List;
 
 import ph.edu.tip.schedulerappinstructor.R;
+import ph.edu.tip.schedulerappinstructor.app.Constants;
 import ph.edu.tip.schedulerappinstructor.databinding.FragmentHomeBinding;
 import ph.edu.tip.schedulerappinstructor.model.data.Event;
+import ph.edu.tip.schedulerappinstructor.ui.events.detail.EventDetailActivity;
 
 /**
  * Created by Iiro Krankka (http://github.com/roughike)
@@ -42,6 +47,8 @@ import ph.edu.tip.schedulerappinstructor.model.data.Event;
 public class HomeFragment extends MvpFragment<HomeView,HomePresenter> implements HomeView {
 
     private FragmentHomeBinding binding;
+    private String TAG = HomeFragment.class.getSimpleName();
+
     public HomeFragment() {
     }
 
@@ -77,8 +84,32 @@ public class HomeFragment extends MvpFragment<HomeView,HomePresenter> implements
     }
 
     @Override
-    public void setData(List<Event> events) {
-        binding.schedEventCount.setText(events.size()+"");
+    public void setDataToday(List<Event> events) {
+       // binding.schedEventCount.setText(events.size()+"");
+        if(events.size()<=0){
+            binding.eventsTodayLabel.setText("You have no events today");
+            return;
+        }
+        HomeListAdapter homeListAdapter = new HomeListAdapter(getMvpView());
+        binding.recyclerViewToday.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
+        binding.recyclerViewToday.setAdapter(homeListAdapter);
+        homeListAdapter.setList(events);
+        binding.eventsTodayCount.setText(events.size()+"");
+    }
+
+    @Override
+    public void setDataUpcoming(List<Event> events) {
+        // binding.schedEventCount.setText(events.size()+"");
+        showAlert(events.size()+"");
+        if(events.size()<=0){
+            binding.eventsUpcomingLabel.setText("You have no events today");
+            return;
+        }
+        HomeListAdapter homeListAdapter = new HomeListAdapter(getMvpView());
+        binding.recyclerViewUpcoming.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
+        binding.recyclerViewUpcoming.setAdapter(homeListAdapter);
+        homeListAdapter.setList(events);
+        binding.eventsUpcomingCount.setText(events.size()+"");
     }
 
     @Override
@@ -86,6 +117,16 @@ public class HomeFragment extends MvpFragment<HomeView,HomePresenter> implements
         binding.swipeRefreshLayout.setRefreshing(false);
 
     }
+
+
+    @Override
+    public void onEventClicked(Event event) {
+        Log.d(TAG, event.getName());
+        Intent intent = new Intent(getActivity(), EventDetailActivity.class);
+        intent.putExtra(Constants.ID, event.getScheduledEventId());
+        startActivity(intent);
+    }
+
 
     @Override
     public void showAlert(String s) {

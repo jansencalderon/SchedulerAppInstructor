@@ -5,8 +5,9 @@
 
         <shape xmlns:android="http://schemas.android.com/apk/res/android">
 
+            <corners android:radius="50dp" />
 
-            <solid android:color="@color/colorAccent2Dark" />
+            <solid android:color="@color/colorAccentDark" />
 
         </shape>
     </item>
@@ -15,7 +16,8 @@
 
         <shape xmlns:android="http://schemas.android.com/apk/res/android">
 
-            <solid android:color="@color/colorAccent2Dark" />
+            <corners android:radius="50dp" />
+            <solid android:color="@color/colorAccentDark" />
 
         </shape>
     </item>
@@ -26,7 +28,8 @@
 
         <shape xmlns:android="http://schemas.android.com/apk/res/android">
 
-            <solid android:color="@color/colorAccent2Dark" />
+            <corners android:radius="50dp" />
+            <solid android:color="@color/colorAccentDark" />
 
         </shape>
     </item>
@@ -36,7 +39,8 @@
 
         <shape xmlns:android="http://schemas.android.com/apk/res/android">
 
-            <solid android:color="@color/colorAccent2" />
+            <corners android:radius="50dp" />
+            <solid android:color="@color/colorAccent" />
 
         </shape>
     </item>

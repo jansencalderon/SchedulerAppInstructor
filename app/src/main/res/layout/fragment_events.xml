@@ -37,6 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_margin="16dp"
             app:fabSize="auto"
+            android:visibility="gone"
             app:backgroundTint="@color/colorAccent2"
             android:tint="@color/white"
             android:onClick="@{()->view.onAddEvent()}"

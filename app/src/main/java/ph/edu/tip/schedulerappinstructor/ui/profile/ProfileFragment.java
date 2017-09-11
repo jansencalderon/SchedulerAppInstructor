@@ -82,8 +82,7 @@ public class ProfileFragment extends MvpFragment<ProfileView,ProfilePresenter> i
     @Override
     public void onLogOut(){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Log Out");
-        builder.setMessage("Are you sure?");
+        builder.setMessage("Are you sure you want to logout?");
         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 // Do nothing but close the dialog

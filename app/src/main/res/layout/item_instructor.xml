@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -31,6 +32,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
         android:clickable="true"
+        app:cardElevation="0dp"
         android:foreground="?selectableItemBackground"
         android:orientation="vertical">
 
@@ -43,6 +45,8 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imageView"
                 android:layout_width="0dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/default_admin"
                 android:layout_height="match_parent"
                 android:layout_weight="30" />
 
@@ -90,6 +94,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="10"
                 android:gravity="top"
+                android:id="@+id/crudPanel"
+                android:visibility="gone"
                 android:orientation="vertical"
                 android:weightSum="100">
 
@@ -97,7 +103,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_button_gray"
+                    android:background="@drawable/button_rounded_gray"
                     android:onClick="@{()->view.onDeleteInstructor(instructor)}">
 
                     <ImageView

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -31,6 +32,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
         android:clickable="true"
+        app:cardElevation="0dp"
         android:foreground="?selectableItemBackground"
         android:onClick="@{()->view.onChooseInstructor(instructor)}"
         android:orientation="vertical">
@@ -44,7 +46,7 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imageView"
                 android:layout_width="0dp"
-                android:layout_margin="6dp"
+                android:layout_margin="10dp"
                 android:layout_height="70dp"
                 android:layout_weight="30" />
 

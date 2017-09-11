@@ -5,9 +5,12 @@ package ph.edu.tip.schedulerappinstructor.model.data;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
+
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
+import ph.edu.tip.schedulerappinstructor.app.Constants;
 
 /**
  * Created by Mark Jansen Calderon on 1/27/2017.
@@ -73,11 +76,10 @@ public class Event extends RealmObject {
     private String calendarDesc;
     @SerializedName("date_start")
     @Expose
-    private String dateStart;
+    private Date dateStart;
     @SerializedName("categories")
     @Expose
     private RealmList<SlotCategory> categories = null;
-
     @SerializedName("scheduled_event_admin")
     @Expose
     private RealmList<ScheduleEventAdmin> admins = null;
@@ -228,11 +230,13 @@ public class Event extends RealmObject {
         this.calendarDesc = calendarDesc;
     }
 
-    public String getDateStart() {
+
+
+    public Date getDateStart() {
         return dateStart;
     }
 
-    public void setDateStart(String dateStart) {
+    public void setDateStart(Date dateStart) {
         this.dateStart = dateStart;
     }
 
@@ -250,5 +254,9 @@ public class Event extends RealmObject {
 
     public void setAdmins(RealmList<ScheduleEventAdmin> admins) {
         this.admins = admins;
+    }
+
+    public boolean isForApproval(){
+        return status.equals(Constants.Status.EVENT_FOR_APPROVAL);
     }
 }

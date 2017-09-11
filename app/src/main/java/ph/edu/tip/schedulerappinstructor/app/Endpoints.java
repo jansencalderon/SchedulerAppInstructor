@@ -6,12 +6,8 @@ package ph.edu.tip.schedulerappinstructor.app;
  */
 
 public class Endpoints {
-
-
-   // public static final String BASE_URL = "http://grabchores.pythonanywhere.com";
-   // public static final String BASE_URL = "http://web.tip.edu.ph/tap";
-    //public static final String BASE_URL = "http://10.3.32.201/scheduler";
-    private static final String BASE_URL = "http://scheduler.dgts.ph";
+    public static final String BASE_URL = "http://10.3.32.201/scheduler";
+    //private static final String BASE_URL = "http://scheduler.dgts.ph";
 
 
     static final String API_URL = BASE_URL + "/api/";

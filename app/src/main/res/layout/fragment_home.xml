@@ -4,63 +4,185 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/swipeRefreshLayout"
         tools:context="ph.edu.tip.schedulerappinstructor.ui.main.MainActivity">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-
+            android:orientation="vertical"
+            android:paddingBottom="20dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp">
 
             <android.support.v7.widget.CardView
+                android:id="@+id/eventsTodayCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
                 android:foreground="?selectableItemBackground"
-                app:cardBackgroundColor="@color/greenSuccess"
-                app:contentPadding="10dp">
+                app:cardBackgroundColor="#ff74f6">
 
-                <FrameLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="end"
-                        android:tint="#62873c"
-                        app:srcCompat="@drawable/ic_event" />
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="end"
+                            android:tint="#ec3ce5"
+                            app:srcCompat="@drawable/ic_event" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:id="@+id/eventsTodayCount"
+                                android:textColor="@color/white"
+                                android:textSize="50sp" />
+
+                            <TextView
+                                android:id="@+id/eventsTodayLabel"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Events Today"
+                                android:textColor="@color/white"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                    </FrameLayout>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerViewToday"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:background="#f256eb"
+                        android:foreground="?selectableItemBackground"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:padding="4dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text=""
-                            android:id="@+id/schedEventCount"
+                            android:drawablePadding="10dp"
+                            android:gravity="center"
+                            android:text="MORE DETAILS"
                             android:textColor="@color/white"
-                            android:textSize="50sp" />
+                            android:textSize="12sp" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Scheduled Events"
-                            android:textColor="@color/white"
-                            android:textSize="14sp" />
+                        <ImageView
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
+                            android:layout_marginEnd="6dp"
+                            android:tint="@color/white"
+                            app:srcCompat="@drawable/ic_arrow_forward" />
                     </LinearLayout>
-                </FrameLayout>
+
+                </LinearLayout>
             </android.support.v7.widget.CardView>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerView"
+            <android.support.v7.widget.CardView
+                android:id="@+id/eventsUpcomingCard"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:foreground="?selectableItemBackground"
+                app:cardBackgroundColor="#5294ff">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="end"
+                            android:tint="#3e6ed9"
+                            app:srcCompat="@drawable/ic_event" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:id="@+id/eventsUpcomingCount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textColor="@color/white"
+                                android:textSize="50sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/eventsUpcomingLabel"
+                                android:text="Upcoming Events"
+                                android:textColor="@color/white"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                    </FrameLayout>
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerViewUpcoming"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#467cf1"
+                        android:foreground="?selectableItemBackground"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:padding="4dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="10dp"
+                            android:gravity="center"
+                            android:text="MORE DETAILS"
+                            android:textColor="@color/white"
+                            android:textSize="12sp" />
+
+                        <ImageView
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
+                            android:layout_marginEnd="6dp"
+                            android:tint="@color/white"
+                            app:srcCompat="@drawable/ic_arrow_forward" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+
         </LinearLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
 </layout>

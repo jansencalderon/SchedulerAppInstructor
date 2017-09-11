@@ -6,12 +6,13 @@
 
         <variable
             name="view"
-            type="ph.edu.tip.schedulerappinstructor.ui.profile.ProfileView"/>
+            type="ph.edu.tip.schedulerappinstructor.ui.profile.ProfileView" />
+
         <variable
             name="admin"
             type="ph.edu.tip.schedulerappinstructor.model.data.Admin" />
 
-        <import type="ph.edu.tip.schedulerappinstructor.util.DateTimeUtils"/>
+        <import type="ph.edu.tip.schedulerappinstructor.util.DateTimeUtils" />
     </data>
 
     <LinearLayout
@@ -25,62 +26,80 @@
             android:layout_margin="16dp"
             app:cardCornerRadius="6dp">
 
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:padding="16dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:layout_gravity="center" />
+                <ImageView
+                    android:layout_margin="6dp"
+                    android:padding="6dp"
+                    android:background="?selectableItemBackground"
+                    android:tint="@color/lightGray"
+                    android:layout_gravity="top|end"
+                    android:layout_width="wrap_content"
+                    app:srcCompat="@drawable/ic_edit_black"
+                    android:layout_height="wrap_content" />
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@{admin.name}"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/colorAccent2"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@{admin.emailAddress}"
-                    android:textColor="@color/lightGray"
-                    android:textSize="14sp" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@{admin.address}"
-                    android:textColor="@color/lightGray"
-                    android:textSize="14sp" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@{DateTimeUtils.toAge(admin.birthday) }"
-                    android:textColor="@color/lightGray"
-                    android:textSize="14sp" />
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_gravity="center"
+                        android:src="@color/lightestGray" />
 
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:text="@{admin.name}"
+                        android:textColor="@color/colorAccent2"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@{admin.emailAddress}"
+                        android:textColor="@color/lightGray"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@{admin.address}"
+                        android:textColor="@color/lightGray"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@{DateTimeUtils.toAge(admin.birthday) }"
+                        android:textColor="@color/lightGray"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+            </FrameLayout>
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
             android:clickable="true"
-            android:onClick="@{()->view.onLogOut()}"
             android:foreground="?selectableItemBackground"
+            android:onClick="@{()->view.onLogOut()}"
             app:cardCornerRadius="6dp">
 
 

@@ -11,11 +11,16 @@ import ph.edu.tip.schedulerappinstructor.model.data.Event;
  */
 
 public interface HomeView extends MvpView {
-    void setData(List<Event> events);
+
+    void setDataToday(List<Event> events);
+
+    void setDataUpcoming(List<Event> events);
 
     void stopLoading();
 
     void showAlert(String s);
 
     void startLoading();
+
+    void onEventClicked(Event event);
 }
